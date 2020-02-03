@@ -1,8 +1,9 @@
+import { AppError } from "./../utils";
 import { ENVIRONMENT } from "../config";
 
 import { logger } from "../utils/logger";
 
-export default (err, req, res, next) => {
+export default (err: AppError, req, res, next) => {
     if (!err.isOperational) {
         if (ENVIRONMENT !== "development") {
             logger.error(
@@ -13,7 +14,7 @@ export default (err, req, res, next) => {
         }
     }
     logger.error(
-        `${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${
+        `${err.statusCode || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${
         req.ip
         } - Stack: ${err.stack}`,
     );

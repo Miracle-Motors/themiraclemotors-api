@@ -15,7 +15,12 @@
         "no-angle-bracket-type-assertion": false,
         "prefer-const": false,
         "no-unused-variable": true,
-        "ordered-imports": false
+        "ordered-imports": false,
+        "interface-name": false,
+        "max-line-length": [
+            true,
+            150
+        ]
     },
     "rulesDirectory": []
 }

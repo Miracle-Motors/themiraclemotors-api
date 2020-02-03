@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity } from "typeorm";
+import { Roles } from "./../Role/roleModel";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToMany, JoinTable } from "typeorm";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -16,6 +17,19 @@ export class Users extends BaseEntity {
 
     @Column({ unique: true })
     public phoneNumber: string;
+
+    @Column({ select: false })
+    public password: string;
+
+    @Column({ default: false })
+    public verified: boolean;
+
+    @Column({ nullable: true, unique: true })
+    public refreshToken: string;
+
+    @ManyToMany((type) => Roles, { eager: true })
+    @JoinTable()
+    public roles: Roles[];
 
     @CreateDateColumn()
     public createdAt: string;

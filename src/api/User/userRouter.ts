@@ -1,6 +1,6 @@
 import express from "express";
 import { validation } from "../../middleware";
-import { controllerHandler } from "./../../shared/controllerHandler";
+import { controllerHandler } from "../../utils";
 import { UserController } from "./userController";
 import { UserValidationSchema } from "./userValidation";
 

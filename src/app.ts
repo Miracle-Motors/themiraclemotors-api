@@ -5,6 +5,8 @@ import { errorHandler, global } from "./middleware";
 import { logger } from "./utils/logger";
 import { createConnection } from "typeorm";
 import "reflect-metadata";
+import { authRouter } from "./api/Auth";
+import { roleRouter } from "./api/Role";
 class App {
     public express = express();
     public basePath = BASE_PATH || "";
@@ -21,7 +23,10 @@ class App {
     }
 
     private mountRoutes() {
-        this.express.use(`${this.basePath}/user`, userRouter);
+        this.express.use(`${this.basePath}/auth`, authRouter);
+        this.express.use(`${this.basePath}/roles`, roleRouter);
+        this.express.use(`${this.basePath}/users`, userRouter);
+
     }
 
     private registerMiddlewares() {
