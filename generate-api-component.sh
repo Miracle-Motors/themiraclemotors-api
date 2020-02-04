@@ -30,8 +30,12 @@ if [ -f "$controller" ]; then
     echo "$controller exist"
 else
     cat >$controller <<EOF
-export class ${1^}Controller {
-   
+import { BaseController } from "./../baseController";
+import { ${1^}Service } from "./${1}Service";
+
+export class ${1^}Controller extends BaseController{
+    private ${1}Service = new ${1^}Service();
+
 }
 EOF
 fi
