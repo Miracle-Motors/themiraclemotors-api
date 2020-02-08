@@ -1,0 +1,1 @@
+export {terminalsRouter} from "./terminalsRouter" 
