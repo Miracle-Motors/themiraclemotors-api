@@ -1,3 +1,4 @@
+import { Terminals } from "./../Terminals";
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany } from "typeorm";
 import { Lga } from "../Lga/lgaModel";
 
@@ -11,6 +12,9 @@ export class States extends BaseEntity {
 
     @OneToMany((type) => Lga, (lgas) => lgas.state)
     public lgas: Lga[];
+
+    @OneToMany((type) => Terminals, (terminals) => terminals.state)
+    public terminals: Terminals[];
 
     @UpdateDateColumn()
     public updatedAt: Date;
