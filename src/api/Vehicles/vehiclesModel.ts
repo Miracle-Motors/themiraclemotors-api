@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 import { VehicleTypes } from "./../VehicleTypes/vehicleTypesModel";
 import { VehiclesFeatures } from "../VehiclesFeatures/vehiclesFeaturesModel";
+import { Trips } from "../Trips/tripsModel";
+import { VehicleStatus } from "../../enums";
 
 @Entity()
 export class Vehicles extends BaseEntity {
@@ -10,8 +12,8 @@ export class Vehicles extends BaseEntity {
     @Column({ unique: true })
     public plateNumber: string;
 
-    @Column({ nullable: true, type: "text" })
-    public description: string;
+    @Column({ type: "enum", enum: VehicleStatus, nullable: true, default: VehicleStatus.AVAILABLE })
+    public status: VehicleStatus;
 
     @ManyToMany((type) => VehiclesFeatures, { eager: true })
     @JoinTable()
@@ -19,6 +21,9 @@ export class Vehicles extends BaseEntity {
 
     @ManyToOne((type) => VehicleTypes, (vehicleTypes) => vehicleTypes.vehicles, { eager: true })
     public type: VehicleTypes;
+
+    @OneToMany((type) => Trips, (trips) => trips.vehicle)
+    public trips: Trips[];
 
     @UpdateDateColumn()
     public updatedAt: Date;
