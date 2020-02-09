@@ -66,8 +66,20 @@ if [ -f "$router" ]; then
 else
     cat >$router <<EOF
 import express from "express";
+import { controllerHandler } from "../../utils";
+import { validation } from "../../middleware";
+import { ${1}ValidationSchema } from "./${1}Validation";
+import { ${1^}Controller } from "./${1}Controller";
+
 
 const router = express.Router();
+const call = controllerHandler;
+const ${1^} = new ${1^}Controller();
+
+router.use(validation(${1}ValidationSchema));
+
+router.get("/", call(${1^}.getMethod, (req, _res, _next) => []));
+
 
 export const $1Router = router;
 EOF
