@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm";
-import { States } from "../States";
-import { Terminals } from "../Terminals";
+import { States } from "../States/statesModel";
+import { Terminals } from "../Terminals/terminalsModel";
 
 @Entity()
 export class Lga extends BaseEntity {

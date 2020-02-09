@@ -1,1 +1,2 @@
-export {terminalsRouter} from "./terminalsRouter" 
+export { Terminals } from "./terminalsModel";
+export { terminalsRouter } from "./terminalsRouter";
