@@ -1,5 +1,6 @@
 import { Roles } from "./../Role/roleModel";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { Trips } from "../Trips/tripsModel";
 
 @Entity()
 export class Users extends BaseEntity {
@@ -30,6 +31,9 @@ export class Users extends BaseEntity {
     @ManyToMany((type) => Roles, { eager: true })
     @JoinTable()
     public roles: Roles[];
+
+    @OneToMany((type) => Trips, (trips) => trips.driver)
+    public trips: Trips[];
 
     @CreateDateColumn()
     public createdAt: string;

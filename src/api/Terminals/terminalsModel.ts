@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne } from "typeorm";
+import { Trips } from "./../Trips/tripsModel";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm";
 import { States } from "../States/statesModel";
 import { Lga } from "../Lga/lgaModel";
 
@@ -10,16 +11,19 @@ export class Terminals extends BaseEntity {
     @Column()
     public name: string;
 
-    @ManyToOne((type) => States, (states) => states.terminals)
+    @ManyToOne((type) => States, (states) => states.terminals, { eager: true })
     public state: States;
 
-    @ManyToOne((type) => Lga, (lga) => lga.terminals)
+    @ManyToOne((type) => Lga, (lga) => lga.terminals, { eager: true })
     public lga: Lga;
 
-    @UpdateDateColumn()
+    @OneToMany((type) => Trips, (trips) => trips.arrivalTerminal)
+    public trips: Trips[];
+
+    @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     public createdAt: Date;
 
 }

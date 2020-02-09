@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, ManyToMany } from "typeorm";
-import { Vehicles } from "../Vehicles";
+import { Vehicles } from "../Vehicles/vehiclesModel";
 
 @Entity()
 export class VehiclesFeatures extends BaseEntity {
@@ -12,9 +12,9 @@ export class VehiclesFeatures extends BaseEntity {
     @ManyToMany((type) => Vehicles)
     public vehicles: Vehicles;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     public createdAt: Date;
 }

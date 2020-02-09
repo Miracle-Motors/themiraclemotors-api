@@ -25,9 +25,9 @@ export class Vehicles extends BaseEntity {
     @OneToMany((type) => Trips, (trips) => trips.vehicle)
     public trips: Trips[];
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     public createdAt: Date;
 }

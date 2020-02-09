@@ -16,10 +16,10 @@ export class States extends BaseEntity {
     @OneToMany((type) => Terminals, (terminals) => terminals.state)
     public terminals: Terminals[];
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     public createdAt: Date;
 
 }

@@ -16,10 +16,10 @@ export class Lga extends BaseEntity {
     @OneToMany((type) => Terminals, (terminals) => terminals.lga)
     public terminals: Terminals[];
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ select: false })
     public createdAt: Date;
 
 }
