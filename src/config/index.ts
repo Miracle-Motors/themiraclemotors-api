@@ -16,3 +16,4 @@ export const TWILIO_TOKEN = process.env.TWILIO_TOKEN;
 export const SMS_FROM = process.env.SMS_FROM;
 export const SMS_RETRIEVE_TOKEN = process.env.SMS_RETRIEVE_TOKEN;
 export const APP_NAME = process.env.APP_NAME;
+export const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
