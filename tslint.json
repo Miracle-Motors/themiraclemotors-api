@@ -20,7 +20,8 @@
         "max-line-length": [
             true,
             150
-        ]
+        ],
+        "triple-equals": false
     },
     "rulesDirectory": []
 }

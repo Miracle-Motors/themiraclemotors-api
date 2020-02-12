@@ -9,17 +9,17 @@
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
         "pretty": true,
-        "noUnusedLocals": true,
+        // "noUnusedLocals": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
             "ES6"
-        ],
+        ]
     },
     "include": [
-        "src/**/*.ts",
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
-    ],
+    ]
 }
