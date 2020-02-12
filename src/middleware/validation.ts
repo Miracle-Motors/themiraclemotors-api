@@ -1,5 +1,6 @@
 import Joi from "@hapi/joi";
 import _ from "lodash";
+import { HttpStatusCode } from "../enums";
 
 /**
  *  Validates incoming input in the body of a request.
@@ -44,7 +45,7 @@ export const validation = (schema: Joi.ObjectSchema, options?: Joi.ValidationOpt
                     message,
                 };
 
-                res.status(400).json(JoiError);
+                res.status(HttpStatusCode.UNPROCESSABLE_ENTITY).json(JoiError);
             }
 
         } else {
