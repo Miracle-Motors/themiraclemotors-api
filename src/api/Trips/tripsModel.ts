@@ -1,3 +1,4 @@
+import { Bookings } from "./../Bookings/bookingsModel";
 import { Seats } from "./seatsModel";
 import { Users } from "./../User/userModel";
 import { Vehicles } from "./../Vehicles/vehiclesModel";
@@ -32,6 +33,9 @@ export class Trips extends BaseEntity {
 
     @OneToMany((type) => Seats, (seats) => seats.trip, { eager: true })
     public seats: Seats[];
+
+    @OneToMany((type) => Bookings, (bookings) => bookings.trip)
+    public bookings: Bookings[];
 
     @UpdateDateColumn()
     public updatedAt: Date;

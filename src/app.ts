@@ -12,6 +12,7 @@ import { authRouter } from "./api/Auth";
 import { roleRouter } from "./api/Role";
 import { vehiclesFeaturesRouter } from "./api/VehiclesFeatures";
 import { tripsRouter } from "./api/Trips";
+import { bookingsRouter } from "./api/Bookings";
 class App {
     public express = express();
     public basePath = BASE_PATH || "";
@@ -36,6 +37,7 @@ class App {
         this.express.use(`${this.basePath}/vehicles`, vehicleRouter);
         this.express.use(`${this.basePath}/terminals`, terminalsRouter);
         this.express.use(`${this.basePath}/trips`, tripsRouter);
+        this.express.use(`${this.basePath}/bookings`, bookingsRouter);
 
     }
 

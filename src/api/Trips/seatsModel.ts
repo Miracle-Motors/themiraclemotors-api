@@ -1,3 +1,4 @@
+import { Bookings } from "./../Bookings/bookingsModel";
 import { Trips } from "./tripsModel";
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, JoinColumn } from "typeorm";
 import { SeatStatus } from "../../enums";
@@ -15,6 +16,9 @@ export class Seats extends BaseEntity {
 
     @ManyToOne((type) => Trips, (trip) => trip.seats)
     public trip: Trips;
+
+    @ManyToOne((type) => Bookings, (booking) => booking.seats)
+    public booking: Bookings;
 
     @UpdateDateColumn({ select: false })
     public updatedAt: Date;
