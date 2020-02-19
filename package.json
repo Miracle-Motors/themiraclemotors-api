@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "mkdir -p ./logs",
     "compile": "tsc",
-    "start": "npm run tsc && node ./dist",
+    "start": "npm run compile && node ./dist",
     "watch": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
