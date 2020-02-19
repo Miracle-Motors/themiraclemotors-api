@@ -1,11 +1,11 @@
 import { Seats } from "./seatsModel";
 import { Vehicles } from "./../Vehicles/vehiclesModel";
-import { AddTripData } from "./tripsInterface";
+import { AddTripData, SearchTripData } from "./tripsInterface";
 import { Trips } from "./tripsModel";
 import { Terminals } from "../Terminals";
 import { AppError } from "../../utils";
 import { VehicleStatus, TripStatus } from "../../enums";
-
+import dayjs from "dayjs";
 export class TripsService {
     public addATrip = async (tripData: AddTripData) => {
         if (tripData.arrivalTerminalId === tripData.departureTerminalId) {
@@ -49,5 +49,16 @@ export class TripsService {
 
     public getTripsByStatus = async (status: TripStatus) => {
         return Trips.find({ where: [{ status }], relations: ["vehicle", "seats"] });
+    }
+
+    public searchTrips = async (searchData: SearchTripData) => {
+        const departureDate = dayjs(searchData.departureTimestamp).format("YYYY-MM-DD");
+        return Trips.find({
+            where: [{
+                arrivalTerminal: searchData.arrivalTerminalId,
+                departureTerminal: searchData.departureTerminalId,
+                departureTimestamp: departureDate,
+            }], relations: ["vehicle", "seats"],
+        });
     }
 }

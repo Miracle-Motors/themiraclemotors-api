@@ -17,6 +17,9 @@ export class Trips extends BaseEntity {
     @Column({ type: "enum", enum: TripStatus, default: TripStatus.AVAILABLE })
     public status: TripStatus;
 
+    @Column()
+    public price: string;
+
     @ManyToOne((type) => Terminals, (terminal) => terminal.trips, { eager: true })
     @JoinColumn({ name: "arrivalTerminalId" })
     public arrivalTerminal: Terminals;
