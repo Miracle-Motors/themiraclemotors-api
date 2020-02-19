@@ -6,18 +6,56 @@ import { Trips, Seats } from "../Trips";
 import { In } from "typeorm";
 import { SeatStatus, TripStatus, BookingType } from "../../enums";
 import md5 from "md5";
+import { PaymentsService, Payments } from "../Payments";
+import dd from "@nunomaduro/dd";
 
 export class BookingsService {
     public bookATrip = async (bookingData: BookTripData) => {
+
+        const trips = await this.validateTrips(bookingData);
+        const tripsSeats: {
+            [tripId: string]: {
+                seats: Seats[],
+            },
+        } = await this.validateSeats(bookingData);
+
+        const paymentModel = await this.verifyPayment(trips, bookingData.paymentRef);
+        const passengers = await Passengers.save(bookingData.passengers);
+        const refId = `${trips[0].departureTerminal.name[0]}${trips[0].arrivalTerminal.name[0]}-${md5(Date.now().toString()).slice(0, 6)}`;
+
+        const bookingModels: Bookings[] = [];
+        for (const trip of trips) {
+            const bookingModel = Bookings.create(bookingData as any);
+            bookingModel.trip = trip;
+            bookingModel.seats = tripsSeats[trip.id].seats;
+            bookingModel.passengers = passengers;
+            bookingModel.referenceId = refId.toUpperCase();
+            bookingModel.payment = paymentModel;
+            bookingModels.push(bookingModel);
+        }
+
+        const bookings = await Bookings.save(bookingModels);
+
+        /* Update seat status */
+        for (const trip of Object.values(tripsSeats)) {
+            for (const seat of trip.seats) {
+                seat.status = SeatStatus.BOOKED;
+                await seat.save();
+            }
+        }
+        await this.checkTripStatus(trips);
+        return bookings;
+    }
+
+    private async validateTrips(bookingData: BookTripData) {
         const tripIds = bookingData.bookings.map((val) => val.tripId);
+
         const trips = await Trips.find({
             where: [{
                 id: In(tripIds),
                 status: TripStatus.AVAILABLE,
-
             }],
         });
-
         if (trips.length == 0) {
             throw new AppError(`Invalid trips selected`);
         } else if (bookingData.type == BookingType.ROUND_TRIP && trips.length != 2) {
@@ -25,7 +63,10 @@ export class BookingsService {
         } else if (bookingData.type == BookingType.ONE_WAY && trips.length != 1) {
             throw new AppError(`Please select only one trip to book a one way trip!`);
         }
+        return trips;
+    }
 
+    private async validateSeats(bookingData: BookTripData) {
         const tripsSeats: {
             [tripId: string]: {
                 seats: Seats[],
@@ -41,7 +82,6 @@ export class BookingsService {
                     },
                 ],
             });
-
             if (!seats || seats.length == 0) {
                 throw new AppError(`All selected seats has already been booked for this trip! Please select another seat(s).`, seats);
             } else if (seats.length < bookingData.numberOfTravellers) {
@@ -49,32 +89,39 @@ export class BookingsService {
             }
             tripsSeats[trip.tripId] = { seats };
         }
+        return tripsSeats;
+    }
 
-        const passengers = await Passengers.save(bookingData.passengers);
-        const refId = `${trips[0].departureTerminal.name[0]}${trips[0].arrivalTerminal.name[0]}-${md5(Date.now().toString()).slice(0, 6).toUpperCase()}`;
-
-        const bookingModels: Bookings[] = [];
-        for (const trip of trips) {
-            const bookingModel = Bookings.create(bookingData as any);
-            bookingModel.trip = trip;
-            bookingModel.seats = tripsSeats[trip.id].seats;
-            bookingModel.passengers = passengers;
-            bookingModel.referenceId = refId;
-            bookingModels.push(bookingModel);
-        }
-
-        const bookings = await Bookings.save(bookingModels);
-
-        /* Update seat status */
-        for (const trip of Object.values(tripsSeats)) {
-            for (const seat of trip.seats) {
-                seat.status = SeatStatus.BOOKED;
-                await seat.save();
+    /**
+     * Verifies payment and returns payment model object
+     *
+     * @private
+     * @param {string} paymentReference
+     * @returns
+     * @memberof BookingsService
+     */
+    private async verifyPayment(trips: Trips[], paymentReference: string) {
+        const tripPrices = trips.map((trip) => Number(trip.price));
+        const expectedTotal = tripPrices.reduce((prevTrip, curTrip) => prevTrip + curTrip);
+        const paymentService = new PaymentsService();
+        const verifyPaymentRes = await paymentService.verifyPayment(paymentReference);
+        if (verifyPaymentRes.status && verifyPaymentRes.data.status == "success") {
+            const paymentData = verifyPaymentRes.data;
+            const amount = paymentData.amount / 100;
+            if (expectedTotal == amount) {
+                const paymentModel = {
+                    amount: String(amount),
+                    method: paymentData.channel,
+                    processor: "paystack",
+                    referenceId: paymentData.reference,
+                };
+                return Payments.create(paymentModel);
             }
+            throw new AppError(`Expected payment of ${expectedTotal} but got ${amount}!`);
         }
-
-        await this.checkTripStatus(trips);
-        return bookings;
+        throw new AppError(`${verifyPaymentRes.data ? verifyPaymentRes.data.gateway_response : verifyPaymentRes.message}`,
+            verifyPaymentRes.data,
+        );
     }
 
     /**
@@ -89,11 +136,12 @@ export class BookingsService {
             const availableSeats = await Seats.find({
                 where: [
                     {
-                        tripId: trip.id,
+                        trip: trip.id,
                         status: SeatStatus.AVAILABLE,
                     },
                 ],
             });
+
             if (availableSeats.length == 0) {
                 trip.status = TripStatus.BOOKED;
                 await trip.save();

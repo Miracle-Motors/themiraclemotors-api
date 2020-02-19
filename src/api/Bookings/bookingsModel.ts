@@ -1,9 +1,10 @@
 import { Users } from "./../User/userModel";
 import { Trips } from "./../Trips/tripsModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany, ManyToOne, Generated } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany, ManyToOne, OneToOne, JoinColumn } from "typeorm";
 import { Seats } from "../Trips/seatsModel";
 import { Passengers } from "./passengersModel";
 import { BookingType } from "../../enums";
+import { Payments } from "../Payments/paymentsModel";
 
 @Entity()
 export class Bookings extends BaseEntity {
@@ -30,6 +31,10 @@ export class Bookings extends BaseEntity {
 
     @OneToMany((type) => Passengers, (passenger) => passenger.booking)
     public passengers: Passengers[];
+
+    @OneToOne((type) => Payments, (payment) => payment.booking)
+    @JoinColumn()
+    public payment: Payments;
 
     @UpdateDateColumn()
     public updatedAt: Date;

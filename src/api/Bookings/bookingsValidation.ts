@@ -2,6 +2,7 @@ import Joi from "@hapi/joi";
 import { BookingType } from "../../enums";
 
 export const bookingsValidationSchema = Joi.object().keys({
+    paymentRef: Joi.string().required(),
     type: Joi.string().valid(BookingType.ONE_WAY, BookingType.ROUND_TRIP).required(),
     numberOfTravellers: Joi.number().required(),
     bookings: Joi.array().items(Joi.object().keys({

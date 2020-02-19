@@ -5,4 +5,5 @@ export const tripsValidationSchema = Joi.object().keys({
     departureTerminalId: Joi.string().uuid().required(),
     departureTimestamp: Joi.date().required(),
     vehicleId: Joi.string().uuid().required(),
+    price: Joi.number().required(),
 });
