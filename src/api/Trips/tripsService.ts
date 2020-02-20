@@ -58,7 +58,10 @@ export class TripsService {
                 arrivalTerminal: searchData.arrivalTerminalId,
                 departureTerminal: searchData.departureTerminalId,
                 departureTimestamp: departureDate,
-            }], relations: ["vehicle", "seats"],
+                status: TripStatus.AVAILABLE,
+            }],
+            relations: ["vehicle", "seats"],
+            order: { departureTimestamp: "DESC" },
         });
     }
 }
