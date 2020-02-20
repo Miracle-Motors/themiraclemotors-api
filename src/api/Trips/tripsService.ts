@@ -6,6 +6,7 @@ import { Terminals } from "../Terminals";
 import { AppError } from "../../utils";
 import { VehicleStatus, TripStatus } from "../../enums";
 import dayjs from "dayjs";
+import { Like } from "typeorm";
 export class TripsService {
     public addATrip = async (tripData: AddTripData) => {
         if (tripData.arrivalTerminalId === tripData.departureTerminalId) {
@@ -57,11 +58,11 @@ export class TripsService {
             where: [{
                 arrivalTerminal: searchData.arrivalTerminalId,
                 departureTerminal: searchData.departureTerminalId,
-                departureTimestamp: departureDate,
+                departureTimestamp: Like(`%${departureDate}%`),
                 status: TripStatus.AVAILABLE,
             }],
             relations: ["vehicle", "seats"],
-            order: { departureTimestamp: "DESC" },
+            order: { departureTimestamp: "ASC" },
         });
     }
 }
