@@ -1,3 +1,4 @@
+import { Users } from "./userModel";
 import { UserService } from "./userService";
 import { BaseController } from "../baseController";
 
@@ -13,5 +14,10 @@ export class UserController extends BaseController {
     public getAllUsers = async () => {
         const users = await this.userService.getAllUsers();
         return this.sendResponse(users);
+    }
+
+    public updateUserInfo = async (userId: string, data: Users) => {
+        const users = await this.userService.updateUserInfo(userId, data);
+        return this.sendResponse(users, "Your profile has been updated successfully!");
     }
 }

@@ -11,5 +11,6 @@ const User = new UserController();
 router.use(validation(UserValidationSchema));
 
 router.get("/", call(User.getAllUsers, (req, _res, _next) => [req.params.id]));
+router.put("/me", call(User.updateUserInfo, (req, _res, _next) => [req.user.id, req.body]));
 
 export const userRouter = router;
