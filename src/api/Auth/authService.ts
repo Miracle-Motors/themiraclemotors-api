@@ -1,3 +1,4 @@
+import { Profile } from "./../Profile";
 import { SignupData } from "./authInterface";
 import { Roles } from "./../Role/roleModel";
 import { Users } from "./../User";
@@ -20,8 +21,8 @@ export class AuthService {
 
     const user = await Users.findOne({
       where: { phoneNumber: parsedPhoneNumber },
-      select: ["id", "firstName", "lastName", "email", "password", "phoneNumber", "verified", "createdAt"],
-      relations: ["roles"],
+      select: ["id", "firstName", "lastName", "email", "password", "phoneNumber", "gender", "verified", "createdAt"],
+      relations: ["roles", "profile"],
     });
 
     if (!user) {
@@ -82,7 +83,8 @@ export class AuthService {
 
       }
 
-      const newUser = { roles: [role], ...userData };
+      const profile = await Profile.create().save();
+      const newUser = { roles: [role], profile, ...userData };
       const user = await Users.create(newUser).save();
       user.save();
 

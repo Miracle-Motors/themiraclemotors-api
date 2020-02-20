@@ -1,3 +1,4 @@
+import { profileRouter } from "./api/Profile";
 import { authorize } from "./middleware/authorization";
 import { vehicleRouter } from "./api/Vehicles";
 import { vehicleTypesRouter } from "./api/VehicleTypes";
@@ -35,6 +36,7 @@ class App {
         this.express.use(authorize);
         this.express.use(`${this.basePath}/roles`, roleRouter);
         this.express.use(`${this.basePath}/users`, userRouter);
+        this.express.use(`${this.basePath}/profiles`, profileRouter);
         this.express.use(`${this.basePath}/vehicles/features`, vehiclesFeaturesRouter);
         this.express.use(`${this.basePath}/vehicles/types`, vehicleTypesRouter);
         this.express.use(`${this.basePath}/vehicles`, vehicleRouter);
