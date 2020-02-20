@@ -23,6 +23,9 @@ export class Users extends BaseEntity {
     @Column({ select: false })
     public password: string;
 
+    @Column()
+    public gender: string;
+
     @Column({ default: false })
     public verified: boolean;
 
