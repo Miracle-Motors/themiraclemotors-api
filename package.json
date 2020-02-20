@@ -14,6 +14,9 @@
     "migrate:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate:down": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   },
+  "engines": {
+    "node": "10.16.3"
+  },
   "author": "Brian Iyoha",
   "license": "ISC",
   "dependencies": {
