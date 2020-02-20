@@ -10,6 +10,7 @@ const Bookings = new BookingsController();
 
 router.use(validation(bookingsValidationSchema));
 
-router.post("/", call(Bookings.bookATrip, (req, _res, _next) => [req.body]));
+router.post("/", call(Bookings.bookATrip, (req, _res, _next) => [req.body, req.user]));
+router.get("/me", call(Bookings.getUserBookings, (req, _res, _next) => [req.user]));
 
 export const bookingsRouter = router;

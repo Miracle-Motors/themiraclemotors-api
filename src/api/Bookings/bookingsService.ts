@@ -1,3 +1,4 @@
+import { Users } from "./../User/userModel";
 import { Passengers } from "./passengersModel";
 import { AppError } from "./../../utils";
 import { Bookings } from "./bookingsModel";
@@ -7,10 +8,10 @@ import { In } from "typeorm";
 import { SeatStatus, TripStatus, BookingType } from "../../enums";
 import md5 from "md5";
 import { PaymentsService, Payments } from "../Payments";
-import dd from "@nunomaduro/dd";
 
 export class BookingsService {
-    public bookATrip = async (bookingData: BookTripData) => {
+
+    public bookATrip = async (bookingData: BookTripData, user: Users) => {
 
         const trips = await this.validateTrips(bookingData);
         const tripsSeats: {
@@ -27,6 +28,7 @@ export class BookingsService {
         for (const trip of trips) {
             const bookingModel = Bookings.create(bookingData as any);
             bookingModel.trip = trip;
+            bookingModel.user = user;
             bookingModel.seats = tripsSeats[trip.id].seats;
             bookingModel.passengers = passengers;
             bookingModel.referenceId = refId.toUpperCase();
@@ -45,6 +47,16 @@ export class BookingsService {
         }
         await this.checkTripStatus(trips);
         return bookings;
+    }
+
+    public getBookingsByUser = async (user: Users) => {
+        return Bookings.find({
+            where: [
+                { user },
+            ],
+            relations: ["seats", "passengers", "payment"],
+            order: { createdAt: "DESC" },
+        });
     }
 
     private async validateTrips(bookingData: BookTripData) {
