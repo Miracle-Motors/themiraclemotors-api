@@ -51,7 +51,8 @@ export const logger = createLogger({
 });
 
 // If we're not in production then log to the `console` with the format:
-if (ENVIRONMENT !== "production") {
+//commented out to allow heruko logs
+//if (ENVIRONMENT !== "production") {
     logger.add(
         new transports.Console({
             format: combine(
@@ -60,4 +61,4 @@ if (ENVIRONMENT !== "production") {
                 ),
         }),
     );
-}
+//}
