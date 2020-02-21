@@ -4,7 +4,8 @@
   "description": "Node with express using typescript",
   "main": "./dist/index.js",
   "scripts": {
-    "postinstall": "mkdir -p ./logs && npm run compile",
+    "postinstall": "mkdir -p ./logs",
+    "heroku-postbuild": "mkdir -p ./logs && npm run compile && npx typeorm migration:run",
     "compile": "tsc",
     "start": "node ./dist",
     "watch": "nodemon",
