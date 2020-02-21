@@ -32,9 +32,9 @@ class App {
 
     private mountRoutes() {
         this.express.use(`${this.basePath}/auth`, authRouter);
+        this.express.use(`${this.basePath}/roles`, roleRouter);
 
         this.express.use(authorize);
-        this.express.use(`${this.basePath}/roles`, roleRouter);
         this.express.use(`${this.basePath}/users`, userRouter);
         this.express.use(`${this.basePath}/profiles`, profileRouter);
         this.express.use(`${this.basePath}/vehicles/features`, vehiclesFeaturesRouter);
