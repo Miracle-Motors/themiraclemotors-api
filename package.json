@@ -1,5 +1,5 @@
 {
-  "name": "node-typescript",
+  "name": "miraclemotors-api",
   "version": "1.0.0",
   "description": "Node with express using typescript",
   "main": "./dist/index.js",
