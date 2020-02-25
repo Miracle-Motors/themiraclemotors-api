@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class AddPriceFieldToTripsTable1581496771461 implements MigrationInterface {
     public name = "AddPriceFieldToTripsTable1581496771461";

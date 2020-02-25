@@ -1,5 +1,5 @@
 import { Terminals } from "./../Terminals";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany } from "typeorm-plus";
 import { Lga } from "../Lga/lgaModel";
 
 @Entity()

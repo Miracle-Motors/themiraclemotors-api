@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class CreateProfileTable1582184006396 implements MigrationInterface {
     public name = "CreateProfileTable1582184006396";

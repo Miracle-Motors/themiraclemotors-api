@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class CreateTripsAndSeatsTable1581251999676 implements MigrationInterface {
     public name = "CreateTripsAndSeatsTable1581251999676";

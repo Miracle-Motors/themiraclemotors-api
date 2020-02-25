@@ -4,7 +4,7 @@ import { AppError } from "./../../utils";
 import { Bookings } from "./bookingsModel";
 import { BookTripData } from "./bookingsInterface";
 import { Trips, Seats } from "../Trips";
-import { In } from "typeorm";
+import { In } from "typeorm-plus";
 import { SeatStatus, TripStatus, BookingType } from "../../enums";
 import md5 from "md5";
 import { PaymentsService, Payments } from "../Payments";

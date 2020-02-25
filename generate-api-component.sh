@@ -44,7 +44,7 @@ if [ -f "$model" ]; then
     echo "$model exist"
 else
     cat >$model <<EOF
-import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm-plus";
 
 @Entity()
 export class ${1^} extends BaseEntity {

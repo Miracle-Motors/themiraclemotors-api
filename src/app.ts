@@ -9,7 +9,7 @@ import { userRouter } from "./api/User";
 import { BASE_PATH, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from "./config";
 import { errorHandler, global } from "./middleware";
 import { logger } from "./utils/logger";
-import { createConnection } from "typeorm";
+import { createConnection } from "typeorm-plus";
 import { authRouter } from "./api/Auth";
 import { roleRouter } from "./api/Role";
 import { vehiclesFeaturesRouter } from "./api/VehiclesFeatures";

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm-plus";
 import { States } from "../States/statesModel";
 import { Terminals } from "../Terminals/terminalsModel";
 

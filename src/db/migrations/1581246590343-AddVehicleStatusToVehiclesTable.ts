@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class AddVehicleStatusToVehiclesTable1581246590343 implements MigrationInterface {
     public name = "AddVehicleStatusToVehiclesTable1581246590343";

@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { MigrationInterface, QueryRunner } from "typeorm-plus";
 
 export class CreateVehiclesFeaturesTable1580748454522 implements MigrationInterface {
     public name = "CreateVehiclesFeaturesTable1580748454522";

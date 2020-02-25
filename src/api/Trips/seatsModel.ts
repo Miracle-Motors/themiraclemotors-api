@@ -1,6 +1,6 @@
 import { Bookings } from "./../Bookings/bookingsModel";
 import { Trips } from "./tripsModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, JoinColumn } from "typeorm-plus";
 import { SeatStatus } from "../../enums";
 
 @Entity()

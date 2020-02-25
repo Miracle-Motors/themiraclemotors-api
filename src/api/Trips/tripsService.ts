@@ -6,7 +6,7 @@ import { Terminals } from "../Terminals";
 import { AppError } from "../../utils";
 import { VehicleStatus, TripStatus } from "../../enums";
 import dayjs from "dayjs";
-import { Like } from "typeorm";
+import { Like } from "typeorm-plus";
 export class TripsService {
     public addATrip = async (tripData: AddTripData) => {
         if (tripData.arrivalTerminalId === tripData.departureTerminalId) {

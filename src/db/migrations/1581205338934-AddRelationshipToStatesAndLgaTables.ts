@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class AddRelationshipToStatesAndLgaTables1581205338934 implements MigrationInterface {
     public name = "AddRelationshipToStatesAndLgaTables1581205338934";

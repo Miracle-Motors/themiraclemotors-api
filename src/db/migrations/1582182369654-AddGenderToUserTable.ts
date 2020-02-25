@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm-plus";
 
 export class AddGenderToUserTable1582182369654 implements MigrationInterface {
     public name = "AddGenderToUserTable1582182369654";

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm-plus";
 import { VehicleTypes } from "./../VehicleTypes/vehicleTypesModel";
 import { VehiclesFeatures } from "../VehiclesFeatures/vehiclesFeaturesModel";
 import { Trips } from "../Trips/tripsModel";

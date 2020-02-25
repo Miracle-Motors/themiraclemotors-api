@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToOne } from "typeorm-plus";
 import { Bookings } from "../Bookings/bookingsModel";
 
 @Entity()

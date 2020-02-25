@@ -1,5 +1,5 @@
 import { Trips } from "./../Trips/tripsModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm-plus";
 import { States } from "../States/statesModel";
 import { Lga } from "../Lga/lgaModel";
 

@@ -3,7 +3,7 @@ import { Roles } from "./../Role/roleModel";
 import {
     Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
     UpdateDateColumn, BaseEntity, ManyToMany, JoinTable, OneToMany, OneToOne, JoinColumn,
-} from "typeorm";
+} from "typeorm-plus";
 import { Trips } from "../Trips/tripsModel";
 import { Profile } from "../Profile/profileModel";
 

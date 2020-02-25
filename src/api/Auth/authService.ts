@@ -13,7 +13,7 @@ import {
 } from "google-libphonenumber";
 
 import bcrypt from "bcrypt";
-import { Not } from "typeorm";
+import { Not } from "typeorm-plus";
 
 export class AuthService {
   public loginUser = async ({ phoneNumber, password }) => {
