@@ -1,7 +1,7 @@
 import { Users } from "./../User/userModel";
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity, ManyToMany } from "typeorm-plus";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Roles extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

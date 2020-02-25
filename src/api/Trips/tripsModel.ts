@@ -6,7 +6,7 @@ import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, Bas
 import { Terminals } from "../Terminals";
 import { TripStatus } from "../../enums";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Trips extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

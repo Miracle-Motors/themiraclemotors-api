@@ -6,7 +6,7 @@ import { Passengers } from "./passengersModel";
 import { BookingType } from "../../enums";
 import { Payments } from "../Payments/paymentsModel";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Bookings extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

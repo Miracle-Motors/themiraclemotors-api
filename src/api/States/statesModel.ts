@@ -2,7 +2,7 @@ import { Terminals } from "./../Terminals";
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany } from "typeorm-plus";
 import { Lga } from "../Lga/lgaModel";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class States extends BaseEntity {
     @PrimaryGeneratedColumn("increment")
     public id: number;

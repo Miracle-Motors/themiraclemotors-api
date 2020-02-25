@@ -3,7 +3,7 @@ import { Trips } from "./tripsModel";
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, JoinColumn } from "typeorm-plus";
 import { SeatStatus } from "../../enums";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Seats extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

@@ -46,7 +46,7 @@ else
     cat >$model <<EOF
 import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm-plus";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class ${1^} extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

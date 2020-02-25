@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BaseEntity, ManyToMany } from "typeorm-plus";
 import { Vehicles } from "../Vehicles/vehiclesModel";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class VehiclesFeatures extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

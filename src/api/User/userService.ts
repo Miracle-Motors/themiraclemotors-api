@@ -1,3 +1,4 @@
+import { dd } from "../../utils";
 import { AppError } from "./../../utils";
 import { Users } from "./userModel";
 import { Profile } from "../Profile";
@@ -6,8 +7,8 @@ export class UserService {
     //     return Users.findOne({ where: { phoneNumber } });
     // }
 
-    public getAllUsers = async () => {
-        return await Users.findAndCount({ current: 1, take: 7 });
+    public getAllUsers = async (page: number, limit: number) => {
+        return await Users.findAndCount({ current: page, size: limit });
     }
 
     public updateUserInfo = async (userId: string, updatedData: Users) => {

@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, Bas
 import { States } from "../States/statesModel";
 import { Terminals } from "../Terminals/terminalsModel";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Lga extends BaseEntity {
     @PrimaryGeneratedColumn("increment")
     public id: number;

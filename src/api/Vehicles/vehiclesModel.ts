@@ -4,7 +4,7 @@ import { VehiclesFeatures } from "../VehiclesFeatures/vehiclesFeaturesModel";
 import { Trips } from "../Trips/tripsModel";
 import { VehicleStatus } from "../../enums";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Vehicles extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

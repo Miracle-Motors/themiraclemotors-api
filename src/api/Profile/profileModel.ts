@@ -1,7 +1,7 @@
 import { Users } from "./../User/userModel";
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, OneToOne, Column } from "typeorm-plus";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Profile extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;

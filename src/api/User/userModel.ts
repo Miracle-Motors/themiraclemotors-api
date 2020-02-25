@@ -7,7 +7,7 @@ import {
 import { Trips } from "../Trips/tripsModel";
 import { Profile } from "../Profile/profileModel";
 
-@Entity()
+@Entity({ orderBy: { createdAt: "DESC"}})
 export class Users extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
