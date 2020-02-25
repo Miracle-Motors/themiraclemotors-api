@@ -12,5 +12,7 @@ router.use(validation(bookingsValidationSchema));
 
 router.post("/", call(Bookings.bookATrip, (req, _res, _next) => [req.body, req.user]));
 router.get("/me", call(Bookings.getUserBookings, (req, _res, _next) => [req.user]));
+router.get("/:userId", call(Bookings.getUserBookings, (req, _res, _next) => [req.params.userId]));
+router.get("/", call(Bookings.getBookings, (req, _res, _next) => [req.query]));
 
 export const bookingsRouter = router;

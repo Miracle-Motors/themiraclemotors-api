@@ -17,4 +17,9 @@ export class BookingsController extends BaseController {
         const bookings = await this.bookingsService.getBookingsByUser(user);
         return this.sendResponse({ data: bookings });
     }
+
+    public getBookings = async ({ limit, page }) => {
+        const bookingsRes = await this.bookingsService.getBookings({ limit, page });
+        return this.sendResponse({ data: bookingsRes[0], total: bookingsRes[1] });
+    }
 }

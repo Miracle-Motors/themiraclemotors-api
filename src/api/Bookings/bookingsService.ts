@@ -59,6 +59,13 @@ export class BookingsService {
         });
     }
 
+    public getBookings = async ({ limit, page }) => {
+        return Bookings.findAndCount({
+            current: page, size: limit,
+            relations: ["seats", "passengers", "payment"],
+        });
+    }
+
     private async validateTrips(bookingData: BookTripData) {
         const tripIds = bookingData.bookings.map((val) => val.tripId);
 
@@ -127,7 +134,7 @@ export class BookingsService {
                     processor: "paystack",
                     referenceId: paymentData.reference,
                 };
-                return Payments.create(paymentModel);
+                return Payments.create(paymentModel).save();
             }
             throw new AppError(`Expected payment of ${expectedTotal} but got ${amount}!`);
         }
