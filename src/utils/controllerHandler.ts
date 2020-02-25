@@ -1,7 +1,6 @@
 import { BaseApiResponse } from "./../api/baseInterface";
 import { Users as UserModel } from "./../api/User/userModel";
 import { Request, Response, NextFunction } from "express";
-import { dd } from ".";
 /* Type declaration to override User type declared by passport */
 declare global {
     namespace Express {
@@ -33,7 +32,7 @@ export const controllerHandler = (promise: (...any) => Promise<BaseApiResponse>,
 };
 
 const prepareRes = (req: Request, result: BaseApiResponse) => {
-    if ((req.query.page || req.query.limit)) {
+    if ((req.query.page && req.query.limit)) {
         if (result.total == null) {
             throw new Error("Total count of items not found. Did you call findAndCount()?");
         }
