@@ -11,6 +11,11 @@ export class TripsController extends BaseController {
         return this.sendResponse({ data: trip, message: "Trip created successfully!", statusCode: HttpStatusCode.CREATED });
     }
 
+    public getAllTrips = async ({ limit, page }) => {
+        const res = await this.tripsService.getAllTrips({ limit, page });
+        return this.sendResponse({ data: res[0], total: res[1] });
+    }
+
     public getTripsByStatus = async (status: TripStatus) => {
         const trips = await this.tripsService.getTripsByStatus(status);
         return this.sendResponse({ data: trips });

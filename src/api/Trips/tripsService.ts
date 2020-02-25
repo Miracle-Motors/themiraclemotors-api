@@ -65,4 +65,8 @@ export class TripsService {
             order: { departureTimestamp: "ASC" },
         });
     }
+
+    public getAllTrips = async ({ page, limit }) => {
+        return await Trips.findAndCount({ current: page, size: limit });
+    }
 }
