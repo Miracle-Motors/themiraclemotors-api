@@ -6,9 +6,9 @@ import { HttpStatusCode } from "../../enums";
 export class TerminalsController extends BaseController {
     private terminalsService = new TerminalsService();
 
-    public getTerminals = async () => {
-        const terminals = await this.terminalsService.getTerminals();
-        return this.sendResponse({ data: terminals });
+    public getTerminals = async ({ page, limit }) => {
+        const terminalsRes = await this.terminalsService.getTerminals({ page, limit });
+        return this.sendResponse({ data: terminalsRes[0], total: terminalsRes[1] });
     }
 
     public addTerminal = async (terminalData: AddTerminal) => {

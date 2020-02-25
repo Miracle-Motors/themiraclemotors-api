@@ -3,9 +3,10 @@ import { States } from "./../States/statesModel";
 import { AddTerminal } from "./terminalInterface";
 import { Terminals } from "./terminalsModel";
 import { Lga } from "../Lga";
+
 export class TerminalsService {
-    public getTerminals = async () => {
-        return await Terminals.find();
+    public getTerminals = async ({ page, limit }) => {
+        return await Terminals.findAndCount({ current: page, size: limit });
     }
 
     public addTerminal = async (terminalData: AddTerminal) => {
