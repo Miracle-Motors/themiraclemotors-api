@@ -40,8 +40,8 @@ const prepareRes = (req: Request, result: BaseApiResponse) => {
         const totalPages = Math.ceil((result.total / Number(limit)));
         return {
             status: result.status,
-            data: result.data,
             message: result.message,
+            data: result.data,
             currentPage: Number(page),
             totalPages,
             nextPage: Number(page) < totalPages ? Number(page) + 1 : null,
@@ -50,8 +50,8 @@ const prepareRes = (req: Request, result: BaseApiResponse) => {
     } else {
         return {
             status: result.status,
-            data: result.data,
             message: result.message,
+            data: result.data,
         };
     }
 };
