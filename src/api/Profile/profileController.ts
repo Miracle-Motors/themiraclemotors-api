@@ -8,6 +8,6 @@ export class ProfileController extends BaseController {
 
     public updateUserProfile = async (user: Users, data: Profile) => {
         const profile = await this.profileService.updateUserProfile(user, data);
-        return this.sendResponse(profile);
+        return this.sendResponse({ data: profile });
     }
 }

@@ -13,11 +13,11 @@ export class RoleController extends BaseController {
 
     public getAllRoles = async () => {
         const roles = await this.roleService.getAllRoles();
-        return this.sendResponse(roles);
+        return this.sendResponse({ data: roles });
     }
 
     public createRole = async (role: Roles) => {
         const newRole = await this.roleService.createRole(role);
-        return this.sendResponse(newRole, `${role.role} role added!`);
+        return this.sendResponse({ data: newRole, message: `${role.role} role added!` });
     }
 }

@@ -7,17 +7,17 @@ export class AuthController extends BaseController {
 
   public login = async (body: { phoneNumber: string; password: string; }) => {
     const data = await this.authService.loginUser(body);
-    return this.sendResponse(data, "Logged In");
+    return this.sendResponse({ data, message: "Logged In" });
   }
 
   public signup = async (user: SignupData) => {
     const data = await this.authService.registerUser(user);
-    return this.sendResponse(data, "User registration successful");
+    return this.sendResponse({ data, message: "User registration successful" });
   }
 
   public refreshTokens = async (refreshToken) => {
     const tokens = await this.authService.refreshTokens(refreshToken);
-    return this.sendResponse(tokens);
+    return this.sendResponse({ data: tokens });
   }
 
 }

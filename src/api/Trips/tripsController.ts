@@ -8,16 +8,16 @@ export class TripsController extends BaseController {
 
     public createTrip = async (tripData: AddTripData) => {
         const trip = await this.tripsService.addATrip(tripData);
-        return this.sendResponse(trip, "Trip created successfully!", HttpStatusCode.CREATED);
+        return this.sendResponse({ data: trip, message: "Trip created successfully!", statusCode: HttpStatusCode.CREATED });
     }
 
     public getTripsByStatus = async (status: TripStatus) => {
         const trips = await this.tripsService.getTripsByStatus(status);
-        return this.sendResponse(trips);
+        return this.sendResponse({ data: trips });
     }
 
     public searchTrips = async (searchData: SearchTripData) => {
         const trips = await this.tripsService.searchTrips(searchData);
-        return this.sendResponse(trips);
+        return this.sendResponse({ data: trips });
     }
 }

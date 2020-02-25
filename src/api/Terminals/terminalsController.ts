@@ -8,11 +8,11 @@ export class TerminalsController extends BaseController {
 
     public getTerminals = async () => {
         const terminals = await this.terminalsService.getTerminals();
-        return this.sendResponse(terminals);
+        return this.sendResponse({ data: terminals });
     }
 
     public addTerminal = async (terminalData: AddTerminal) => {
         const terminal = await this.terminalsService.addTerminal(terminalData);
-        return this.sendResponse(terminal, `${terminal.name} Terminal added!`, HttpStatusCode.CREATED);
+        return this.sendResponse({ data: terminal, message: `${terminal.name} Terminal added!`, statusCode: HttpStatusCode.CREATED });
     }
 }

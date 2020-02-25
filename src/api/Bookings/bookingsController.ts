@@ -10,11 +10,11 @@ export class BookingsController extends BaseController {
 
     public bookATrip = async (bookingData: BookTripData, user: Users) => {
         const booking = await this.bookingsService.bookATrip(bookingData, user);
-        return this.sendResponse(booking, "Booking successful!", HttpStatusCode.CREATED);
+        return this.sendResponse({ data: booking, message: "Booking successful!", statusCode: HttpStatusCode.CREATED });
     }
 
     public getUserBookings = async (user: Users) => {
         const bookings = await this.bookingsService.getBookingsByUser(user);
-        return this.sendResponse(bookings);
+        return this.sendResponse({ data: bookings });
     }
 }

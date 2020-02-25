@@ -1,6 +1,5 @@
 import { AppError } from "./../../utils";
 import { Users } from "./userModel";
-import dd from "@nunomaduro/dd";
 import { Profile } from "../Profile";
 export class UserService {
     // public getUserByPhoneNumber = async (phoneNumber: string) => {
@@ -8,7 +7,7 @@ export class UserService {
     // }
 
     public getAllUsers = async () => {
-        return await Users.find();
+        return await Users.findAndCount({ current: 1, take: 7 });
     }
 
     public updateUserInfo = async (userId: string, updatedData: Users) => {

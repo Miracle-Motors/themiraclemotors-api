@@ -8,11 +8,15 @@ export class VehiclesController extends BaseController {
 
     public registerVehicle = async (vehicleData: RegisterVehicleData) => {
         const vehicle = await this.vehiclesService.registerVehicle(vehicleData);
-        return this.sendResponse(vehicle, `Vehicle "${vehicleData.plateNumber}" successfully registered!`, HttpStatusCode.CREATED);
+        return this.sendResponse({
+            data: vehicle,
+            message: `Vehicle "${vehicleData.plateNumber}" successfully registered!`,
+            statusCode: HttpStatusCode.CREATED,
+        });
     }
 
     public getVehicles = async () => {
         const vehicle = await this.vehiclesService.getVehicles();
-        return this.sendResponse(vehicle);
+        return this.sendResponse({ data: vehicle });
     }
 }

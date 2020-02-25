@@ -7,6 +7,6 @@ export class VehicleTypesController extends BaseController {
 
     public addVehicleType = async (model: AddVehicleTypeData) => {
         const vehicle = await this.vehicleTypesService.addVehicleType(model);
-        return this.sendResponse(vehicle, `Vehicle Model "${model.model}" successfully registered!`);
+        return this.sendResponse({ data: vehicle, message: `Vehicle Model "${model.model}" successfully registered!` });
     }
 }

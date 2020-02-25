@@ -6,10 +6,10 @@ export class VehiclesFeaturesController extends BaseController {
 
     public createVehicleFeatureAttribute = async ({ attribute }) => {
         const feature = await this.vehiclesFeaturesService.createVehicleFeatureAttribute(attribute);
-        return this.sendResponse(feature, `Added "${attribute}" to vehicle features!`);
+        return this.sendResponse({ data: feature, message: `Added "${attribute}" to vehicle features!` });
     }
     public getVehicleFeatures = async () => {
         const features = await this.vehiclesFeaturesService.getVehicleFeatures();
-        return this.sendResponse(features);
+        return this.sendResponse({ data: features });
     }
 }

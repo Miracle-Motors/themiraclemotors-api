@@ -13,11 +13,11 @@ export class UserController extends BaseController {
 
     public getAllUsers = async () => {
         const users = await this.userService.getAllUsers();
-        return this.sendResponse(users);
+        return this.sendResponse({ data: users });
     }
 
     public updateUserInfo = async (userId: string, data: Users) => {
         const users = await this.userService.updateUserInfo(userId, data);
-        return this.sendResponse(users, "Your profile has been updated successfully!");
+        return this.sendResponse({ data: users, message: "Your profile has been updated successfully!" });
     }
 }
