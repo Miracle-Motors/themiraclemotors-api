@@ -11,9 +11,9 @@ import { BaseController } from "../baseController";
 export class UserController extends BaseController {
     private userService = new UserService();
 
-    public getAllUsers = async () => {
-        const users = await this.userService.getAllUsers();
-        return this.sendResponse({ data: users });
+    public getAllUsers = async ({ limit, page }) => {
+        const res = await this.userService.getAllUsers(page, limit);
+        return this.sendResponse({ data: res[0], total: res[1] });
     }
 
     public updateUserInfo = async (userId: string, data: Users) => {
