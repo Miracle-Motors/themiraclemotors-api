@@ -12,7 +12,7 @@ export class Roles extends BaseEntity {
     @ManyToMany((type) => Roles)
     public users: Users[];
 
-    @CreateDateColumn({ select: false })
+    @CreateDateColumn()
     public createdAt: string;
 
     @UpdateDateColumn({ select: false })

@@ -15,6 +15,6 @@ export class VehiclesFeatures extends BaseEntity {
     @UpdateDateColumn({ select: false })
     public updatedAt: Date;
 
-    @CreateDateColumn({ select: false })
+    @CreateDateColumn()
     public createdAt: Date;
 }
