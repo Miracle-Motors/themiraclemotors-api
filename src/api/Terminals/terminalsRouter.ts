@@ -1,3 +1,4 @@
+import { authorize } from "./../../middleware/authorization";
 import { terminalsValidationSchema } from "./terminalsValidation";
 import { TerminalsController } from "./terminalsController";
 import express from "express";
@@ -11,6 +12,6 @@ const Terminals = new TerminalsController();
 router.use(validation(terminalsValidationSchema));
 
 router.get("/", call(Terminals.getTerminals, (req, _res, _next) => [req.query]));
-router.post("/", call(Terminals.addTerminal, (req, _res, _next) => [req.body]));
+router.post("/", [authorize], call(Terminals.addTerminal,  (req, _res, _next) => [req.body]));
 
 export const terminalsRouter = router;

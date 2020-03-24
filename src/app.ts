@@ -33,6 +33,7 @@ class App {
     private mountRoutes() {
         this.express.use(`${this.basePath}/auth`, authRouter);
         this.express.use(`${this.basePath}/roles`, roleRouter);
+        this.express.use(`${this.basePath}/terminals`, terminalsRouter);
 
         this.express.use(authorize);
         this.express.use(`${this.basePath}/users`, userRouter);
@@ -40,7 +41,6 @@ class App {
         this.express.use(`${this.basePath}/vehicles/features`, vehiclesFeaturesRouter);
         this.express.use(`${this.basePath}/vehicles/types`, vehicleTypesRouter);
         this.express.use(`${this.basePath}/vehicles`, vehicleRouter);
-        this.express.use(`${this.basePath}/terminals`, terminalsRouter);
         this.express.use(`${this.basePath}/trips`, tripsRouter);
         this.express.use(`${this.basePath}/bookings`, bookingsRouter);
 
