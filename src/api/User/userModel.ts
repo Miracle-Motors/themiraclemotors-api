@@ -7,7 +7,7 @@ import {
 import { Trips } from "../Trips/tripsModel";
 import { Profile } from "../Profile/profileModel";
 
-@Entity({ orderBy: { createdAt: "DESC"}})
+@Entity({ orderBy: { createdAt: "DESC" } })
 export class Users extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
@@ -27,7 +27,7 @@ export class Users extends BaseEntity {
     @Column({ select: false })
     public password: string;
 
-    @Column()
+    @Column({ nullable: true })
     public gender: string;
 
     @Column({ default: false })
