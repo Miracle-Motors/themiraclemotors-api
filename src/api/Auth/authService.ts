@@ -1,7 +1,7 @@
 import { Profile } from "./../Profile";
 import { SignupData } from "./authInterface";
 import { Roles } from "./../Role/roleModel";
-import { Users } from "./../User";
+import { Users } from "./../User/userModel";
 import uuidv4 from "uuid/v4";
 import jwt from "jsonwebtoken";
 import { AppError } from "./../../utils";

@@ -12,7 +12,7 @@ export const SignupValidationSchema = Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
     roleId: Joi.string().uuid().optional(),
-    gender: Joi.string().valid("male", "female").required(),
+    gender: Joi.string().valid("male", "female").optional(),
 });
 
 export const RefreshTokensValidationSchema = Joi.object().keys({
