@@ -1,3 +1,4 @@
+import { userRouter } from "./api/User";
 import { profileRouter } from "./api/Profile";
 import { authorize } from "./middleware/authorization";
 import { vehicleRouter } from "./api/Vehicles";
@@ -5,7 +6,6 @@ import { vehicleTypesRouter } from "./api/VehicleTypes";
 import { terminalsRouter } from "./api/Terminals";
 import "reflect-metadata";
 import express from "express";
-import { userRouter } from "./api/User";
 import { BASE_PATH, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from "./config";
 import { errorHandler, global } from "./middleware";
 import { logger } from "./utils/logger";
