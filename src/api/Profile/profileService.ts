@@ -11,6 +11,7 @@ export class ProfileService {
         profile = Profile.create({ ...profile, ...data });
         user.profile = profile;
         await profile.save();
-        return await user.save();
+        user.reload();
+        return user;
     }
 }
