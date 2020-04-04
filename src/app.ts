@@ -1,20 +1,17 @@
-import { userRouter } from "./api";
-import { profileRouter } from "./api";
+import {
+    userRouter,
+    settingsRouter, authRouter, profileRouter,
+    vehicleRouter, vehicleTypesRouter, terminalsRouter,
+    roleRouter, vehiclesFeaturesRouter, tripsRouter, bookingsRouter,
+} from "./api";
 import { authorize } from "./middleware/authorization";
-import { vehicleRouter } from "./api";
-import { vehicleTypesRouter } from "./api";
-import { terminalsRouter } from "./api";
 import "reflect-metadata";
 import express from "express";
 import { BASE_PATH, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } from "./config";
 import { errorHandler, global } from "./middleware";
 import { logger } from "./utils/logger";
 import { createConnection } from "typeorm-plus";
-import { authRouter } from "./api";
-import { roleRouter } from "./api";
-import { vehiclesFeaturesRouter } from "./api";
-import { tripsRouter } from "./api";
-import { bookingsRouter } from "./api";
+
 class App {
     public express = express();
     public basePath = BASE_PATH || "";
@@ -43,6 +40,7 @@ class App {
         this.express.use(`${this.basePath}/vehicles`, vehicleRouter);
         this.express.use(`${this.basePath}/trips`, tripsRouter);
         this.express.use(`${this.basePath}/bookings`, bookingsRouter);
+        this.express.use(`${this.basePath}/settings`, settingsRouter);
 
     }
 

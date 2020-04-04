@@ -11,3 +11,4 @@ export * from "./Trips";
 export * from "./VehicleTypes";
 export * from "./Vehicles";
 export * from "./VehiclesFeatures";
+export * from "./Settings";

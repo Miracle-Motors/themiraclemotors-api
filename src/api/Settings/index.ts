@@ -1,1 +1,1 @@
-export {SettingsRouter} from "./SettingsRouter" 
+export { settingsRouter } from "./settingsRouter";
