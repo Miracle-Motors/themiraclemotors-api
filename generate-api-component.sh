@@ -1,5 +1,6 @@
 #!/bin/bash
-folder=./src/api/${1^}
+root=`pwd`
+folder=$root/src/api/${1}
 mkdir -p $folder
 index=$folder/index.ts
 service=$folder/$1Service.ts
@@ -20,7 +21,7 @@ if [ -f "$service" ]; then
     echo "$service exist"
 else
     cat >$service <<EOF
-export class ${1^}Service {
+export class ${1}Service {
    
 }
 EOF
@@ -31,10 +32,10 @@ if [ -f "$controller" ]; then
 else
     cat >$controller <<EOF
 import { BaseController } from "./../baseController";
-import { ${1^}Service } from "./${1}Service";
+import { ${1}Service } from "./${1}Service";
 
-export class ${1^}Controller extends BaseController{
-    private ${1}Service = new ${1^}Service();
+export class ${1}Controller extends BaseController{
+    private ${1}Service = new ${1}Service();
 
 }
 EOF
@@ -47,7 +48,7 @@ else
 import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm-plus";
 
 @Entity({ orderBy: { createdAt: "DESC"}})
-export class ${1^} extends BaseEntity {
+export class ${1} extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
 
@@ -69,16 +70,16 @@ import express from "express";
 import { controllerHandler } from "../../utils";
 import { validation } from "../../middleware";
 import { ${1}ValidationSchema } from "./${1}Validation";
-import { ${1^}Controller } from "./${1}Controller";
+import { ${1}Controller } from "./${1}Controller";
 
 
 const router = express.Router();
 const call = controllerHandler;
-const ${1^} = new ${1^}Controller();
+const ${1} = new ${1}Controller();
 
 router.use(validation(${1}ValidationSchema));
 
-router.get("/", call(${1^}.getMethod, (req, _res, _next) => []));
+router.get("/", call(${1}.getMethod, (req, _res, _next) => []));
 
 
 export const $1Router = router;
@@ -96,4 +97,4 @@ export const ${1}ValidationSchema = Joi.object().keys({
 EOF
 fi
 
-echo "Created $1 component"
+echo "Done"
