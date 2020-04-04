@@ -1,6 +1,7 @@
 #!/bin/bash
 root=`pwd`
-folder=$root/src/api/${1}
+upperCaseName="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
+folder=$root/src/api/${upperCaseName}
 mkdir -p $folder
 index=$folder/index.ts
 service=$folder/$1Service.ts
@@ -21,7 +22,7 @@ if [ -f "$service" ]; then
     echo "$service exist"
 else
     cat >$service <<EOF
-export class ${1}Service {
+export class ${upperCaseName}Service {
    
 }
 EOF
@@ -32,10 +33,10 @@ if [ -f "$controller" ]; then
 else
     cat >$controller <<EOF
 import { BaseController } from "./../baseController";
-import { ${1}Service } from "./${1}Service";
+import { ${upperCaseName}Service } from "./${1}Service";
 
-export class ${1}Controller extends BaseController{
-    private ${1}Service = new ${1}Service();
+export class ${upperCaseName}Controller extends BaseController{
+    private ${upperCaseName}Service = new ${upperCaseName}Service();
 
 }
 EOF
@@ -48,7 +49,7 @@ else
 import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm-plus";
 
 @Entity({ orderBy: { createdAt: "DESC"}})
-export class ${1} extends BaseEntity {
+export class ${upperCaseName} extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
 
@@ -69,17 +70,17 @@ else
 import express from "express";
 import { controllerHandler } from "../../utils";
 import { validation } from "../../middleware";
-import { ${1}ValidationSchema } from "./${1}Validation";
-import { ${1}Controller } from "./${1}Controller";
+import { ${upperCaseName}ValidationSchema } from "./${1}Validation";
+import { ${upperCaseName}Controller } from "./${1}Controller";
 
 
 const router = express.Router();
 const call = controllerHandler;
-const ${1} = new ${1}Controller();
+const ${upperCaseName} = new ${upperCaseName}Controller();
 
-router.use(validation(${1}ValidationSchema));
+router.use(validation(${upperCaseName}ValidationSchema));
 
-router.get("/", call(${1}.getMethod, (req, _res, _next) => []));
+router.get("/", call(${upperCaseName}.getMethod, (req, _res, _next) => []));
 
 
 export const $1Router = router;
@@ -92,12 +93,12 @@ else
     cat >$validation <<EOF
 import Joi from "@hapi/joi";
 
-export const ${1}ValidationSchema = Joi.object().keys({
+export const ${upperCaseName}ValidationSchema = Joi.object().keys({
 });
 EOF
 fi
 
 indexFile=$root/src/api/index.ts
-exportPath="export * from \"./${1}\";"
+exportPath="export * from \"./${upperCaseName}\";"
 echo -e "$(cat $indexFile)\n$exportPath" > $indexFile
 echo "Done"
