@@ -97,4 +97,7 @@ export const ${1}ValidationSchema = Joi.object().keys({
 EOF
 fi
 
+indexFile=$root/src/api/index.ts
+exportPath="export * from \"./${1}\";"
+echo -e "$(cat $indexFile)\n$exportPath" > $indexFile
 echo "Done"
