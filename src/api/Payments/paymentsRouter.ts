@@ -1,12 +1,12 @@
 import express from "express";
-import { controllerHandler } from "../../utils";
+// import { controllerHandler } from "../../utils";
 import { validation } from "../../middleware";
 import { paymentsValidationSchema } from "./paymentsValidation";
-import { PaymentsController } from "./paymentsController";
+// import { PaymentsController } from "./paymentsController";
 
 const router = express.Router();
-const call = controllerHandler;
-const Payments = new PaymentsController();
+// const call = controllerHandler;
+// const Payments = new PaymentsController();
 
 router.use(validation(paymentsValidationSchema));
 

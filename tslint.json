@@ -21,7 +21,8 @@
             true,
             150
         ],
-        "triple-equals": false
+        "triple-equals": false,
+        "no-duplicate-imports":true
     },
     "rulesDirectory": []
 }

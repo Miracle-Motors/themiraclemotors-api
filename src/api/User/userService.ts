@@ -1,4 +1,3 @@
-import { dd } from "../../utils";
 import { AppError } from "./../../utils";
 import { Users } from "./userModel";
 import { Profile } from "../Profile";

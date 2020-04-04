@@ -1,6 +1,5 @@
 import { Settings } from "./settingsModel";
 import { SettingsData } from "./settingsInterface";
-import { dd } from "../../utils";
 
 export class SettingsService {
     public async getSettings() {

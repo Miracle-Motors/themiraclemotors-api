@@ -1,7 +1,5 @@
 import { Bookings } from "./bookingsModel";
-import { Trips } from "./../Trips/tripsModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany, ManyToOne } from "typeorm-plus";
-import { Seats } from "../Trips/seatsModel";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne } from "typeorm-plus";
 
 @Entity({ orderBy: { createdAt: "DESC"}})
 export class Passengers extends BaseEntity {

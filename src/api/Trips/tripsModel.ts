@@ -2,7 +2,7 @@ import { Bookings } from "./../Bookings/bookingsModel";
 import { Seats } from "./seatsModel";
 import { Users } from "./../User/userModel";
 import { Vehicles } from "./../Vehicles/vehiclesModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToOne, ManyToOne, JoinColumn, OneToMany } from "typeorm-plus";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm-plus";
 import { Terminals } from "../Terminals";
 import { TripStatus } from "../../enums";
 

@@ -1,6 +1,5 @@
 import appRoot from "app-root-path";
 import { config, createLogger, format, transports } from "winston";
-import { ENVIRONMENT } from "../config";
 const { combine, timestamp, printf } = format;
 
 const logFormat = printf((info) => {
@@ -51,9 +50,9 @@ export const logger = createLogger({
 });
 
 // If we're not in production then log to the `console` with the format:
-//commented out to allow heruko logs
-//if (ENVIRONMENT !== "production") {
-    logger.add(
+// commented out to allow heruko logs
+// if (ENVIRONMENT !== "production") {
+logger.add(
         new transports.Console({
             format: combine(
                 format.colorize(),
@@ -61,4 +60,4 @@ export const logger = createLogger({
                 ),
         }),
     );
-//}
+// }
