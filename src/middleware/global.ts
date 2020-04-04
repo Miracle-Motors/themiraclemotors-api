@@ -1,3 +1,4 @@
+import { trimInput } from "./trimInputs";
 import { jwtStrategy } from "./passport";
 import passport from "passport";
 import bodyParser = require("body-parser");
@@ -20,5 +21,5 @@ export default (app: Express) => {
     app.use(bodyParser.json());
     app.use(logger("dev"));
     passport.use("jwt", jwtStrategy);
-
+    app.use(trimInput);
 };
