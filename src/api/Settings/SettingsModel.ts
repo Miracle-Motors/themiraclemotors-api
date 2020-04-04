@@ -1,11 +1,14 @@
-import { Entity, PrimaryGeneratedColumn,  UpdateDateColumn, CreateDateColumn, BaseEntity } from "typeorm-plus";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column } from "typeorm-plus";
 
-@Entity({ orderBy: { createdAt: "DESC"}})
+@Entity({ orderBy: { createdAt: "DESC" } })
 export class Settings extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
 
-     @UpdateDateColumn()
+    @Column({ default: 0 })
+    public serviceCharge: number;
+
+    @UpdateDateColumn()
     public updatedAt: Date;
 
     @CreateDateColumn()
