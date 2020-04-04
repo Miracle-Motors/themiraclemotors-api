@@ -1,8 +1,9 @@
 import { Passengers } from "./passengersModel";
-import { BookingType } from "../../enums";
+import { BookingType, PaymentType } from "../../enums";
 
 export interface BookTripData {
-    paymentRef: string;
+    paymentRef?: string;
+    paymentType: PaymentType;
     type: BookingType;
     numberOfTravellers: number;
     passengers: Passengers[];

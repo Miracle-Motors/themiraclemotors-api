@@ -1,3 +1,4 @@
+import uuidv4 from "uuid/v4";
 import { Users } from "./../User/userModel";
 import { Passengers } from "./passengersModel";
 import { AppError } from "./../../utils";
@@ -5,7 +6,7 @@ import { Bookings } from "./bookingsModel";
 import { BookTripData } from "./bookingsInterface";
 import { Trips, Seats } from "../Trips";
 import { In } from "typeorm-plus";
-import { SeatStatus, TripStatus, BookingType } from "../../enums";
+import { SeatStatus, TripStatus, BookingType, PaymentType } from "../../enums";
 import md5 from "md5";
 import { PaymentsService, Payments } from "../Payments";
 
@@ -20,7 +21,7 @@ export class BookingsService {
             },
         } = await this.validateSeats(bookingData);
 
-        const paymentModel = await this.verifyPayment(trips, bookingData.paymentRef);
+        const paymentModel = await this.verifyPayment(trips, bookingData.paymentType, bookingData.paymentRef);
         const passengers = await Passengers.save(bookingData.passengers);
         const refId = `${trips[0].departureTerminal.name[0]}${trips[0].arrivalTerminal.name[0]}-${md5(Date.now().toString()).slice(0, 6)}`;
 
@@ -119,28 +120,40 @@ export class BookingsService {
      * @returns
      * @memberof BookingsService
      */
-    private async verifyPayment(trips: Trips[], paymentReference: string) {
+    private async verifyPayment(trips: Trips[], paymentType: PaymentType, paymentReference: string) {
         const tripPrices = trips.map((trip) => Number(trip.price));
         const expectedTotal = tripPrices.reduce((prevTrip, curTrip) => prevTrip + curTrip);
         const paymentService = new PaymentsService();
-        const verifyPaymentRes = await paymentService.verifyPayment(paymentReference);
-        if (verifyPaymentRes.status && verifyPaymentRes.data.status == "success") {
-            const paymentData = verifyPaymentRes.data;
-            const amount = paymentData.amount / 100;
-            if (expectedTotal == amount) {
-                const paymentModel = {
-                    amount: String(amount),
-                    method: paymentData.channel,
-                    processor: "paystack",
-                    referenceId: paymentData.reference,
-                };
-                return Payments.create(paymentModel).save();
+        if (paymentType === PaymentType.ONLINE) {
+            const verifyPaymentRes = await paymentService.verifyPayment(paymentReference);
+            if (verifyPaymentRes.status && verifyPaymentRes.data.status == "success") {
+                const paymentData = verifyPaymentRes.data;
+                const amount = paymentData.amount / 100;
+                if (expectedTotal == amount) {
+                    // tslint:disable-next-line:no-shadowed-variable
+                    const paymentModel = {
+                        amount: String(amount),
+                        method: paymentData.channel,
+                        processor: "paystack",
+                        referenceId: paymentData.reference,
+                        status: "paid",
+                    };
+                    return Payments.create(paymentModel).save();
+                }
+                throw new AppError(`Expected payment of ${expectedTotal} but got ${amount}!`);
             }
-            throw new AppError(`Expected payment of ${expectedTotal} but got ${amount}!`);
+            throw new AppError(`${verifyPaymentRes.data ? verifyPaymentRes.data.gateway_response : verifyPaymentRes.message}`,
+                verifyPaymentRes.data,
+            );
         }
-        throw new AppError(`${verifyPaymentRes.data ? verifyPaymentRes.data.gateway_response : verifyPaymentRes.message}`,
-            verifyPaymentRes.data,
-        );
+
+        const paymentModel = {
+            amount: String(expectedTotal),
+            method: "offline",
+            processor: "manual",
+            referenceId: uuidv4(),
+        };
+        return Payments.create(paymentModel).save();
     }
 
     /**

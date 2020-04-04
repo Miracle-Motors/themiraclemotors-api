@@ -1,8 +1,9 @@
 import Joi from "@hapi/joi";
-import { BookingType } from "../../enums";
+import { BookingType, PaymentType } from "../../enums";
 
 export const bookingsValidationSchema = Joi.object().keys({
-    paymentRef: Joi.string().required(),
+    paymentRef: Joi.string().when("paymentType", { is: PaymentType.ONLINE, then: Joi.required(), otherwise: Joi.forbidden() }),
+    paymentType: Joi.valid(PaymentType.ONLINE, PaymentType.OFFLINE).required(),
     type: Joi.string().valid(BookingType.ONE_WAY, BookingType.ROUND_TRIP).required(),
     numberOfTravellers: Joi.number().required(),
     bookings: Joi.array().items(Joi.object().keys({

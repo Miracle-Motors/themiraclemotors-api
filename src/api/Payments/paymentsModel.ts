@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToOne } from "typeorm-plus";
 import { Bookings } from "../Bookings/bookingsModel";
 
-@Entity({ orderBy: { createdAt: "DESC"}})
+@Entity({ orderBy: { createdAt: "DESC" } })
 export class Payments extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
@@ -17,6 +17,9 @@ export class Payments extends BaseEntity {
 
     @Column()
     public method: string;
+
+    @Column({ default: "pending" })
+    public status: string;
 
     @OneToOne((type) => Bookings, (booking) => booking.payment)
     public booking: Bookings;

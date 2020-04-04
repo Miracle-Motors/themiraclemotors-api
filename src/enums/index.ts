@@ -1,3 +1,4 @@
+export { PaymentType } from "./paymentType";
 export { BookingType } from "./bookingType";
 export { SeatStatus } from "./seatStatus";
 export { TripStatus } from "./tripsStatus";
