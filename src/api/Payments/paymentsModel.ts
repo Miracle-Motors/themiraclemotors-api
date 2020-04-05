@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToOne } from "typeorm-plus";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, OneToMany } from "typeorm-plus";
 import { Bookings } from "../Bookings/bookingsModel";
 
 @Entity({ orderBy: { createdAt: "DESC" } })
@@ -21,8 +21,8 @@ export class Payments extends BaseEntity {
     @Column({ default: "pending" })
     public status: string;
 
-    @OneToOne((type) => Bookings, (booking) => booking.payment)
-    public booking: Bookings;
+    @OneToMany((type) => Bookings, (booking) => booking.payment)
+    public booking: Bookings[];
 
     @UpdateDateColumn()
     public updatedAt: Date;
