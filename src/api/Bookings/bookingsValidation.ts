@@ -15,5 +15,8 @@ export const bookingsValidationSchema = Joi.object().keys({
         name: Joi.string().required(),
         ageBracket: Joi.string().valid("adult", "child").required(),
         gender: Joi.string().valid("male", "female").required(),
+        phoneNumber: Joi.number().required(),
+        email: Joi.string().email().optional(),
+        address: Joi.string().optional(),
     })).length(Joi.ref("numberOfTravellers")).required(),
 });
