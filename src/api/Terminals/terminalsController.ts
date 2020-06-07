@@ -15,4 +15,14 @@ export class TerminalsController extends BaseController {
         const terminal = await this.terminalsService.addTerminal(terminalData);
         return this.sendResponse({ data: terminal, message: `${terminal.name} Terminal added!`, statusCode: HttpStatusCode.CREATED });
     }
+
+    public updateTerminal = async (terminalId: string, terminalData: AddTerminal) => {
+        const terminal = await this.terminalsService.updateTerminal(terminalId, terminalData);
+        return this.sendResponse({ data: terminal, message: `${terminal.name} Terminal updated!` });
+    }
+
+    public deleteTerminal = async (terminalId: string) => {
+        const terminal = await this.terminalsService.deleteTerminal(terminalId);
+        return this.sendResponse({ data: terminal, message: `${terminal.name} Terminal deleted!` });
+    }
 }
