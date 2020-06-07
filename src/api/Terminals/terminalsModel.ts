@@ -1,9 +1,9 @@
 import { Trips } from "./../Trips/tripsModel";
-import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany } from "typeorm-plus";
+import { Entity, PrimaryGeneratedColumn, UpdateDateColumn, CreateDateColumn, BaseEntity, Column, ManyToOne, OneToMany, DeleteDateColumn } from "typeorm-plus";
 import { States } from "../States/statesModel";
 import { Lga } from "../Lga/lgaModel";
 
-@Entity({ orderBy: { createdAt: "DESC"}})
+@Entity({ orderBy: { createdAt: "DESC" } })
 export class Terminals extends BaseEntity {
     @PrimaryGeneratedColumn("uuid")
     public id: string;
@@ -26,4 +26,6 @@ export class Terminals extends BaseEntity {
     @CreateDateColumn()
     public createdAt: Date;
 
+    @DeleteDateColumn()
+    public deletedAt: Date;
 }
