@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { MigrationInterface, QueryRunner } from "typeorm-plus";
 
 export class AddSoftDeleteColumnOnTerminalsTables1591497516558 implements MigrationInterface {
     public name = "AddSoftDeleteColumnOnTerminalsTables1591497516558";
