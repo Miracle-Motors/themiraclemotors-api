@@ -18,6 +18,6 @@ export class UserController extends BaseController {
 
     public updateUserInfo = async (userId: string, data: Users) => {
         const users = await this.userService.updateUserInfo(userId, data);
-        return this.sendResponse({ data: users, message: "Your profile has been updated successfully!" });
+        return this.sendResponse({ data: users, message: "User profile has been successfully updated!" });
     }
 }
