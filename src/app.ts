@@ -2,7 +2,7 @@ import {
     userRouter,
     settingsRouter, authRouter, profileRouter,
     vehicleRouter, vehicleTypesRouter, terminalsRouter,
-    roleRouter, vehiclesFeaturesRouter, tripsRouter, bookingsRouter,
+    roleRouter, vehiclesFeaturesRouter, tripsRouter, bookingsRouter, statesRouter,
 } from "./api";
 import { authorize } from "./middleware/authorization";
 import "reflect-metadata";
@@ -31,6 +31,7 @@ class App {
         this.express.use(`${this.basePath}/auth`, authRouter);
         this.express.use(`${this.basePath}/roles`, roleRouter);
         this.express.use(`${this.basePath}/terminals`, terminalsRouter);
+        this.express.use(`${this.basePath}/states`, statesRouter);
 
         this.express.use(authorize);
         this.express.use(`${this.basePath}/users`, userRouter);
