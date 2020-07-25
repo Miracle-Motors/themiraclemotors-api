@@ -9,6 +9,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 
 export default (app: Express) => {
+    app.enable("trust proxy");
     app.use(
         rateLimit({
             windowMs: 15 * 60 * 1000, // 15 minutes
