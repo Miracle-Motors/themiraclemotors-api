@@ -12,7 +12,7 @@ router.post("/signup", [validation(SignupValidationSchema)],
   call(Auth.signup, (req, _res, _next) => [req.body]));
 
 router.post("/signin", [validation(LoginValidationSchema)],
-  call(Auth.login, (req, _res, _next) => [req.body]));
+  call(Auth.login, (req, _res, _next) => [{...req.body, req}]));
 
 router.post("/refresh-token", validation(RefreshTokensValidationSchema),
   call(Auth.refreshTokens, (req, _res, _next) => [req.body.refreshToken]),
