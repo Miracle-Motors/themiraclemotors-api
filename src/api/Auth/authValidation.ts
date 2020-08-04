@@ -3,6 +3,7 @@ import Joi from "@hapi/joi";
 export const LoginValidationSchema = Joi.object().keys({
     phoneNumber: Joi.number().required(),
     password: Joi.string().required(),
+    isAdmin: Joi.boolean().required(),
 });
 
 export const SignupValidationSchema = Joi.object().keys({

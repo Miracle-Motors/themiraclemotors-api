@@ -16,14 +16,36 @@ import bcrypt from "bcrypt";
 import { Not } from "typeorm-plus";
 
 export class AuthService {
-  public loginUser = async ({ phoneNumber, password }) => {
+  public loginUser = async ({ phoneNumber, password, isAdmin }) => {
     let { parsedPhoneNumber } = this.parsePhoneNumber(phoneNumber);
+    let user: Users;
 
-    const user = await Users.findOne({
-      where: { phoneNumber: parsedPhoneNumber },
-      select: ["id", "firstName", "lastName", "email", "password", "phoneNumber", "gender", "verified", "createdAt"],
-      relations: ["roles", "profile"],
-    });
+    if (isAdmin) {
+      let adminRole = await Roles.findOne({ where: { role: "admin" } });
+      user = await Users.findOne({
+        where: { phoneNumber: parsedPhoneNumber },
+        select: ["id", "firstName", "lastName", "email", "password", "phoneNumber", "gender", "verified", "createdAt"],
+        relations: ["roles", "profile"],
+      });
+
+      if (user) {
+        if (!adminRole) {
+          adminRole = await Roles.create({ role: "admin" }).save();
+        }
+
+        const hasAdmin = user.roles.find((role) => role.id === adminRole.id);
+
+        if (!hasAdmin) {
+          user = null;
+        }
+      }
+    } else {
+      user = await Users.findOne({
+        where: { phoneNumber: parsedPhoneNumber },
+        select: ["id", "firstName", "lastName", "email", "password", "phoneNumber", "gender", "verified", "createdAt"],
+        relations: ["roles", "profile"],
+      });
+    }
 
     if (!user) {
       throw new AppError(
