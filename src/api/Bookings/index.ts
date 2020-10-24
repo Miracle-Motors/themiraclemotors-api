@@ -1,0 +1,1 @@
+export { bookingsRouter } from "./bookingsRouter";
